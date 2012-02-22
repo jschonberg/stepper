@@ -1,0 +1,259 @@
+/*Containers*/
+
+#allContentBox{
+    margin:auto;
+    width:415px;
+}
+
+#topContentBox{
+    width:inherit;
+    float:left;
+    height:50%;
+    margin-bottom:-160px;
+}
+
+#leftContentBox{
+    width:320px;
+    float:left;    
+}
+
+#rightContentBox{
+    width:75px;
+    float:right;
+}
+
+#meterBox{
+    float:left;
+}
+
+#barsBox{
+    padding-bottom:15px;
+    float:left;
+}
+
+#notesBox{
+    width:320px;
+    float:left;
+    
+}
+
+#testReadoutBox{
+    border:1px solid #ccc;
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:#BFBFBF;
+    font-size:10px;
+    padding:3px;
+    font-family:helvetica, arial;
+    visibility:hidden; /*Not in dev/test mode so it's hidden*/
+}
+
+#titleBox{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    font-size:9px;
+    padding:3px;
+    font-family:helvetica, arial;
+    color:#BFBFBF;
+    width:auto;
+}
+
+/*Objects*/
+
+body{
+    background-image: url('../images/background.gif');
+}
+
+.note{
+    width:8px;
+    height:8px;
+    margin-bottom:6px;
+    padding:1px;
+}
+
+.note:hover{
+    width:8px;
+    height:8px;
+    padding:0px;
+    border:1px solid #000;
+    cursor:pointer;
+    -moz-box-shadow:    0px 0px 5px 1px #ccc;
+    -webkit-box-shadow: 0px 0px 5px 1px #ccc;
+    box-shadow:         0px 0px 5px 1px #ccc;
+}
+
+.noteSelected{
+    width:8px;
+    height:8px;
+    padding:0px;
+    border:1px solid #666;
+    -moz-box-shadow:    0px 0px 5px 1px #ccc;
+    -webkit-box-shadow: 0px 0px 5px 1px #ccc;
+    box-shadow:         0px 0px 5px 1px #ccc;
+}
+
+.noteContainer{
+    margin-left:5px;
+    margin-right:5px;
+    float:left;
+    display:inline;
+}
+
+.meterContainer {
+    margin: 10px 5px 4px 5px;
+    width:8px;
+    height:8px;
+    background:white;
+    border:1px solid #CCC;
+    float:left;
+    position:relative;
+}
+
+.meterContainer:hover{
+    border:1px solid #000;
+    cursor:pointer;
+    -moz-box-shadow:    0px 0px 5px 1px #ccc;
+    -webkit-box-shadow: 0px 0px 5px 1px #ccc;
+    box-shadow:         0px 0px 5px 1px #ccc;
+}
+
+.meterContainerSelected {
+    background:black;
+}
+
+.meterContainerPending{
+    border:1px solid #900;
+}
+
+.bar{
+    width:10px;
+    height:27px;
+    border-bottom:2px solid #666;
+    margin-left:20px;
+    margin-right:auto;
+    position:absolute;
+    margin-left:5px;
+    bottom:0px;
+    z-index:-1;
+    opacity:0.85;
+}
+
+/*.barCap{
+    width:15px;
+    height:4px;
+    background:#666;
+    margin-right:auto;
+    margin-left:auto;
+    position:relative;
+    
+}*/
+
+.barMarkCapped{
+    width:15px;
+    height:1px;
+    border-bottom:4px solid #666;
+    margin-top:5px;
+    padding-top:1px;
+    margin-right:2.5px;
+    margin-left:2.5px;
+    position:relative;
+    cursor:pointer;
+    
+}
+
+.barMark{
+    width:10px;
+    height:1px;
+    border-bottom:1px solid #ccc;
+    margin-top:0px;
+    padding-top:9px;
+    margin-right:5px;
+    margin-left:5px;
+    position:relative;
+    
+}
+
+.barMark:hover{
+    border-bottom:2px solid black;
+    padding-top:8px;
+    cursor:pointer;
+    position:relative;
+    
+}
+
+.barContainer{
+    float:left;
+    display:inline;
+    position:relative;
+    height:187px;
+}
+
+
+/*Defining styling*/
+.inactive{
+    background:#CCC;
+}
+
+.inactiveBox{
+    background-image:url('../images/inactive.png');
+    background-repeat:no-repeat;
+    background-position:center; 
+}
+
+#rightContentBox p{
+    font-family: Helvetica, Arial;
+    font-size:10px;
+    color:#666;
+}
+
+#rightContentBox img{
+    margin-bottom:2px;
+    padding:1px;
+    display:block;
+}
+
+#rightContentBox img:hover{
+    border:1px solid black;
+    padding:0px;
+    cursor:pointer;
+}
+
+#rightContentBox .modeSelected{
+    padding:0px;
+    border:1px solid #666;
+}
+
+#rightContentBox .control{
+    text-decoration:none;
+    color:#666;
+}
+
+#rightContentBox .control:hover{
+    color:black;
+    cursor:pointer;
+}
+
+#rightContentBox .set{
+    color:black;
+    font-weight:bold;
+}
+
+#rightContentBox b{
+    color:black;
+    font-size:12px;
+    padding-bottom:5px;
+    display:block;
+}
+
+#titleBox b{
+    font-size:28;
+    color:black;
+    font-weight:300;
+    text-align:center;
+    letter-spacing:3px; 
+    margin-bottom:5px;
+    display:block;   
+}
+
