@@ -3,9 +3,8 @@ import os
 from flask import Flask
 app = Flask(__name__)
 
-url_for('static', filename='style.css')
 
-@app.route('/index.html')
+@app.route('/')
 def hello():
     openfile = open('./index.html', 'r')
     file_text = openfile.read()
