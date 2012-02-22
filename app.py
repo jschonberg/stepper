@@ -5,7 +5,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return 'Hello WOrld!'
+    openfile = open('./index.html', 'r')
+    file_text = openfile.read()
+    return file_text
     
 if __name__ == '__main__':
     #Bind to PORT if defined, otherwise default to 5000
