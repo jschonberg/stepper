@@ -368,7 +368,7 @@ function changeMode(mode_object){
     var mode = mode_object.index();
         
     //Change colors
-    $('#modeStylesheet').attr('href', 'style/mode'+ mode +'.css');
+    $('#modeStylesheet').attr('href', './static/style/mode'+ mode +'.css');
     
     //Change mode button selected
     $('#mode' + currentMode + 'Button').removeClass('modeSelected');
