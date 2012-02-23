@@ -68,6 +68,8 @@
 body{
     background-image: url('../images/background.jpg');
     overflow-x:hidden;
+    overflow-y:hidden;
+    
 }
 
 .note{
