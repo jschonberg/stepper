@@ -15,6 +15,7 @@
 #leftContentBox{
     float:left;    
     width:640px;
+    overflow-x:hidden;
 }
 
 #rightContentBox{
