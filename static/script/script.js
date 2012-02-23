@@ -391,7 +391,7 @@ function changeNumberColumns(new_columns_object){
             var meter_object = $('.meterContainer').slice(new_beats);
             $('.barContainer').slice(new_beats)
                               .add(note_object)
-                              .add(meter_object).fadeOut(100);
+                              .add(meter_object).css('opacity',0.01).fadeOut(100);
                                      $('#leftContentBox, #notesBox').animate({  
                                            width: (new_beats)*20,        
                                            easing: 'swing'              
@@ -415,7 +415,7 @@ function changeNumberColumns(new_columns_object){
         var meter_object = $('.meterContainer').slice(total_beats,new_beats);
         $('.barContainer').slice(total_beats,new_beats)
                           .add(note_object)
-                          .add(meter_object).fadeIn('fast');
+                          .add(meter_object).css('opacity',0.01).fadeIn('fast');
     }    
     
     //Change Which item is bolded
