@@ -415,7 +415,7 @@ function changeNumberColumns(new_columns_object){
         var meter_object = $('.meterContainer').slice(total_beats,new_beats);
         $('.barContainer').slice(total_beats,new_beats)
                           .add(note_object)
-                          .add(meter_object).css('opacity',0.01).fadeIn('fast');
+                          .add(meter_object).css('opacity',1).fadeIn('fast');
     }    
     
     //Change Which item is bolded
