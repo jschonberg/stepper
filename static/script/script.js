@@ -391,7 +391,7 @@ function changeNumberColumns(new_columns_object){
             var meter_object = $('.meterContainer').slice(new_beats);
             $('.barContainer').slice(new_beats)
                               .add(note_object)
-                              .add(meter_object).css('opacity',0.01).fadeOut(100);
+                              .add(meter_object).animate({opacity:0.01}).fadeOut(100);
                                      $('#leftContentBox, #notesBox').animate({  
                                            width: (new_beats)*20,        
                                            easing: 'swing'              
