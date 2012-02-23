@@ -395,11 +395,11 @@ function changeNumberColumns(new_columns_object){
                                      $('#leftContentBox, #notesBox').animate({  
                                            width: (new_beats)*20,        
                                            easing: 'swing'              
-                                           }, 'fast' );  
+                                           }, 300);  
                                            $('#allContentBox').animate({  
                                            width: (new_beats)*20 + parseInt($('#rightContentBox').css('width')) + boxPadding,        
                                            easing: 'swing'                 
-                                           }, 'fast');
+                                           }, 300);
     }
     //If increasing number of beats fade in
     else if(new_beats > total_beats){
