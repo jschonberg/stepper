@@ -3,7 +3,7 @@
 //=================================
 var current_beat = 0; //Zero-indexed 
 var next_beat = 1; //Zero-indexed 
-var total_beats = 32; //Total number of columns/beats (max 32, min 4)
+var total_beats = 16; //Total number of columns/beats (max 32, min 4)
 var intervalID;
 var speedFactor = 600;
 var currentMode = 0;
