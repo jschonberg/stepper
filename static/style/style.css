@@ -2,7 +2,7 @@
 
 #allContentBox{
     margin:auto;
-    width:415px;
+    width:735px;
 }
 
 #topContentBox{
@@ -13,8 +13,8 @@
 }
 
 #leftContentBox{
-    width:320px;
     float:left;    
+    width:640px;
 }
 
 #rightContentBox{
@@ -24,17 +24,20 @@
 
 #meterBox{
     float:left;
+    height:24px;
+    clear: both;
 }
 
 #barsBox{
     padding-bottom:15px;
     float:left;
+    height:187;
+    clear:both;
 }
 
 #notesBox{
-    width:320px;
-    float:left;
-    
+    width:640px;
+    height:96px;
 }
 
 #testReadoutBox{
@@ -64,6 +67,7 @@
 
 body{
     background-image: url('../images/background.jpg');
+    overflow-x:hidden;
 }
 
 .note{
@@ -208,19 +212,19 @@ body{
     color:#666;
 }
 
-#rightContentBox img{
+#rightContentBox #modeButtons img{
     margin-bottom:2px;
     padding:1px;
     display:block;
 }
 
-#rightContentBox img:hover{
+#rightContentBox #modeButtons img:hover{
     border:1px solid black;
     padding:0px;
     cursor:pointer;
 }
 
-#rightContentBox .modeSelected{
+#rightContentBox #modeButtons .modeSelected{
     padding:0px;
     border:1px solid #666;
 }

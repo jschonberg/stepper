@@ -1,17 +1,23 @@
 //=================================
 //========Global Variables=========
 //=================================
-var current_beat = 0; //Zero-indexed from 0-15 denoting 16 beats
-var next_beat = 1; //Zero-indexed from 0-15 denoting 16 beats
+var current_beat = 0; //Zero-indexed 
+var next_beat = 1; //Zero-indexed 
+var total_beats = 32; //Total number of columns/beats (max 32, min 4)
 var intervalID;
-var speedFactor = 800;
+var speedFactor = 600;
 var currentMode = 0;
 
-//Volume levels range from 0 - 14 for each 0th to 15th beat
-var volumes = new Array(8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8);
+var boxPadding = 20; //Padding between left and right content box
+                     //need to update when css is updated
+
+//Volume levels range for each beat, default is 8 for mid volume
+var volumes = new Array(8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
+                        8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8);
 
 //Note possibilities are 0 - 5 with 0 being first note and 5 == inactive
-var current_note = new Array(5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5);
+var current_note = new Array(5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+                             5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5);
                             
 //Speed values range from 1 - 5
 var speed = 3;
@@ -23,14 +29,7 @@ var pending = false;
 var soundReady = false;
 var mouseDown = false;
 
-//Mode setup
-// var modeColors = [
-//     ['#22D8CF', '#2286D8', '#223DD8', '#BDA7D7', '#D7A8A8'],
-//     ['#F685A8', '#F69B85', '#F6C885', '#EDF7C6', '#C7F7EB'],
-//     ['#98ED8E', '#8EEDB4', '#8EEDDA', '#D0E1ED', '#ECD0ED'],
-//     ['#BCEAA5', '#BCBEB3', '#BC99B3', '#FFD0B1', '#FFD089']
-// ];
-
+//Sound Setup
 var modeSounds = [
     ['0mode0', '1mode0', '2mode0', '3mode0', '4mode0'],
     ['0mode1', '1mode1', '2mode1', '3mode1', '4mode1'],
@@ -38,7 +37,6 @@ var modeSounds = [
     ['0mode3', '1mode3', '2mode3', '3mode3', '4mode3']
 ];
 
-//Sound Setup
 soundManager.url = './static/script/swf/'; // SM2 .SWFs
 soundManager.flashVersion = 9;
 soundManager.debugMode = true;  //In debug mode for dev/testing
@@ -126,6 +124,12 @@ function bindClickHandlers(){
         changeMode($(this));
     });
     
+    //Increase and decrease columns
+    $('#setColumns8, #setColumns16, #setColumns24, #setColumns32').bind('click', function(){
+        changeNumberColumns($(this));
+    });
+    
+    
     //Keep track of mouse
     window.addEventListener("mousedown", function(){
        mouseDown = true; 
@@ -166,39 +170,10 @@ function printState(){
     $('#testNextBeat').html(next_beat)
     
     //Notes and Volumes
-    $('#testColumn1Note').html(current_note[0]);
-    $('#testColumn2Note').html(current_note[1]);
-    $('#testColumn3Note').html(current_note[2]);
-    $('#testColumn4Note').html(current_note[3]);
-    $('#testColumn5Note').html(current_note[4]);
-    $('#testColumn6Note').html(current_note[5]);
-    $('#testColumn7Note').html(current_note[6]);
-    $('#testColumn8Note').html(current_note[7]);
-    $('#testColumn9Note').html(current_note[8]);
-    $('#testColumn10Note').html(current_note[9]);
-    $('#testColumn11Note').html(current_note[10]);
-    $('#testColumn12Note').html(current_note[11]);
-    $('#testColumn13Note').html(current_note[12]);
-    $('#testColumn14Note').html(current_note[13]);
-    $('#testColumn15Note').html(current_note[14]);
-    $('#testColumn16Note').html(current_note[15]);
-    
-    $('#testColumn1Volume').html(volumes[0]);
-    $('#testColumn2Volume').html(volumes[1]);
-    $('#testColumn3Volume').html(volumes[2]);
-    $('#testColumn4Volume').html(volumes[3]);
-    $('#testColumn5Volume').html(volumes[4]);
-    $('#testColumn6Volume').html(volumes[5]);
-    $('#testColumn7Volume').html(volumes[6]);
-    $('#testColumn8Volume').html(volumes[7]);
-    $('#testColumn9Volume').html(volumes[8]);
-    $('#testColumn10Volume').html(volumes[9]);
-    $('#testColumn11Volume').html(volumes[10]);
-    $('#testColumn12Volume').html(volumes[11]);
-    $('#testColumn13Volume').html(volumes[12]);
-    $('#testColumn14Volume').html(volumes[13]);
-    $('#testColumn15Volume').html(volumes[14]);
-    $('#testColumn16Volume').html(volumes[15]);
+    for (var i = current_note.length - 1; i >= 0; i--){
+        $('#testColumn' + (i + 1) + 'Note').html(current_note[i]);
+        $('#testColumn' + (i + 1) + 'Volume').html(volumes[i]);          
+    };
 }
 
 //=================================
@@ -237,14 +212,14 @@ function reverse(event){
         //Reverse beats
         if(!in_reverse){
                next_beat = (current_beat + 1);
-               if(next_beat == 16){
+               if(next_beat == total_beats){
                    next_beat = 0;
                }
            }
         else if(in_reverse){        
             next_beat = (current_beat - 1);
             if(next_beat == -1){
-                next_beat = 15;
+                next_beat = total_beats - 1;
             }
         }        
     }
@@ -379,6 +354,77 @@ function changeMode(mode_object){
     
 }
 
+function changeNumberColumns(new_columns_object){ 
+    var new_beats;
+    
+    switch(new_columns_object.index())
+    {
+    case 0: //As set in index.html, 8 Columns
+      new_beats = 8;  
+      console.log(total_beats);           
+                    
+      break;
+    case 1: //As set in index.html, 16 Columns
+      new_beats = 16;     
+      console.log(total_beats);           
+      break;
+    case 2: //As set in index.html, 24 Columns
+      new_beats = 24;     
+      console.log(total_beats);           
+                 
+      break;
+    case 3: //As set in index.html, 32 Columns
+      new_beats = 32;
+      console.log(total_beats);           
+      
+      break;
+    default:
+      console.log("Error in index in changeNumberColumns");
+    }
+    
+    //If no change needed return
+    if(new_beats == total_beats) return;
+    
+    //If decreasing number of beats fade out
+    if(new_beats < total_beats){
+            var note_object = $('.noteContainer').slice(new_beats);
+            var meter_object = $('.meterContainer').slice(new_beats);
+            $('.barContainer').slice(new_beats)
+                              .add(note_object)
+                              .add(meter_object).fadeOut(100);
+                                     $('#leftContentBox, #notesBox').animate({  
+                                           width: (new_beats)*20,        
+                                           easing: 'swing'              
+                                           }, 'fast' );  
+                                           $('#allContentBox').animate({  
+                                           width: (new_beats)*20 + parseInt($('#rightContentBox').css('width')) + boxPadding,        
+                                           easing: 'swing'                 
+                                           }, 'fast');
+    }
+    //If increasing number of beats fade in
+    else if(new_beats > total_beats){
+        $('#leftContentBox, #notesBox').animate({  
+              width: (new_beats)*20,        
+              easing: 'swing'              
+              }, 'fast' );  
+              $('#allContentBox').animate({  
+              width: (new_beats)*20 + parseInt($('#rightContentBox').css('width')) + boxPadding,        
+              easing: 'swing'                 
+              }, 'fast');
+        var note_object = $('.noteContainer').slice(total_beats,new_beats);
+        var meter_object = $('.meterContainer').slice(total_beats,new_beats);
+        $('.barContainer').slice(total_beats,new_beats)
+                          .add(note_object)
+                          .add(meter_object).fadeIn('fast');
+    }    
+    
+    //Change Which item is bolded
+    $('#setColumns8,#setColumns16,#setColumns24,#setColumns32').removeClass("set");
+    $(new_columns_object).addClass("set");
+    
+    total_beats = new_beats;
+}
+
 
 
 //=================================
@@ -405,14 +451,14 @@ function cycle(){
     current_beat = next_beat;
     if(!in_reverse){
         next_beat = (current_beat + 1);
-        if(next_beat == 16){
+        if(next_beat >= total_beats){
             next_beat = 0;
         }
     }
     else if(in_reverse){        
         next_beat = (current_beat - 1);
-        if(next_beat == -1){
-            next_beat = 15;
+        if(next_beat <= -1){
+            next_beat = total_beats - 1;
         }
     }
     
